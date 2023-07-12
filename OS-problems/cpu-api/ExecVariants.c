@@ -6,6 +6,7 @@ int main(void){
 
     int rc;
     char *argv[] = {"/bin/ls",NULL};
+    int pid;
 
     if((rc = fork()) == 0) {
         if(execvp("/bin/ls",argv) == -1){
@@ -14,7 +15,8 @@ int main(void){
     }else if(rc == -1){
         printf("cant create a child process");
     }else{
-        wait(NULL);
+        pid = wait(NULL);
+        printf("Pid returned at Parent %d\n", pid);
         //parent
     }
 
